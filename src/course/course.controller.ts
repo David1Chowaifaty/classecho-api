@@ -87,9 +87,13 @@ export async function getEnrolledStudents(req: Request, res: Response) {
 }
 export async function leaveCourse(req: Request, res: Response) {
   try {
+    const scheme = z.object({
+      id: z.coerce.number(),
+      course_code: z.string(),
+    });
     const connection = req.app.get("connection") as Connection;
-    const id = stringValidator.parse(req.body.id);
-    const _result = await LeaveCourse(connection, id);
+    const { id, course_code } = scheme.parse(req.body.id);
+    const _result = await LeaveCourse(connection, id, course_code);
     return res.send(_result.success);
   } catch (error) {
     return res.status(405).send(error);

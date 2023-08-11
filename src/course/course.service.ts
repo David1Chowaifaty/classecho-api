@@ -103,12 +103,13 @@ export function GetEnrolledStudents(
 
 export function LeaveCourse(
   connection: Connection,
-  id: string
+  id: number,
+  course_code: string
 ): Promise<Model> {
   return new Promise((reslove, reject) => {
     connection.query(
-      `delete from Enrollments where student_id=?`,
-      [id],
+      `delete from Enrollments where student_id=? and course_code=?`,
+      [id, course_code],
       (error, result) => {
         if (error) {
           return reject(error);

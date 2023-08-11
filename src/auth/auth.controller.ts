@@ -10,7 +10,7 @@ export async function login(req: Request, res: Response) {
       email: z.string().email(),
       password: z
         .string()
-        .regex(/^(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*?&])[a-z\d@$!.%*?&]+$/),
+        .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$.!%*?&])[a-zA-Z\d@$!.%*?&]+$/),
     });
     const connection: Connection = req.app.get("connection");
     const { email, password } = loginSchema.parse(req.body);
@@ -52,7 +52,7 @@ export async function register(req: Request, res: Response) {
       email: z.string().email(),
       password: z
         .string()
-        .regex(/^(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*?&])[a-z\d@$!.%*?&]+$/),
+        .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$.!%*?&])[a-zA-Z\d@$!.%*?&]+$/),
     });
     const connection: Connection = req.app.get("connection");
     const { email, password } = registerSchema.parse(req.body);
