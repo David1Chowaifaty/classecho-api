@@ -17,10 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("connection", connection);
 app.use("/", routes);
-const io = new Server(port);
-io.on("connection", () => {
-  console.log("connection on");
-});
+
 app.listen(port, () => {
   connection.connect();
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
